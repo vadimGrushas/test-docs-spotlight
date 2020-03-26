@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Test api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /orders:
+    post:
+      summary: Place order
+      operationId: post-orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    status: ok
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: number
+                instrument:
+                  type: string
+                amount:
+                  type: number
+                price:
+                  type: number
+                order_type:
+                  type: string
+                  enum:
+                    - LIMIT
+                    - MARKET
+                order_side:
+                  type: string
+                  enum:
+                    - BUY
+                    - SELL
+              required:
+                - order_id
+                - instrument
+                - amount
+                - price
+                - order_type
+                - order_side
+            examples:
+              example-1:
+                value:
+                  order_id: 1
+                  instrument: BTC/USD
+                  amount: 100.1
+                  price: 5.23
+                  order_type: LIMIT
+                  order_side: BUY
+          application/javascript:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+components:
+  schemas: {}
